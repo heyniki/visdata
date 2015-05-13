@@ -164,7 +164,7 @@ d3.json("bmorecrime.json", function(error, root) {
 	console.log(root);
 	console.log("hello");
 
-	var circles = canvas.selectAll("circle")
+	var circles = svg.selectAll("circle")
 					.data(root.data)
 					.enter()
 					.append("circle")
