@@ -146,94 +146,93 @@
 
 // node.call( drag);
 
-var diameter = 960,
-    format = d3.format(",d"),
-    color = d3.scale.category20c();
-
-var bubble = d3.layout.pack()
-    .sort(null)
-    .size([diameter, diameter])
-    .padding(1.5);
+var diameter = 960;
 
 var svg = d3.select("body").append("svg")
     .attr("width", diameter)
     .attr("height", diameter);
-    // .attr("class", "bubble");
 
 var json;
 d3.json("bmorecrime.json", function(error, root) {
 	json = root;
-	
-	console.log(root);
-	console.log("hello");
+
+// 	var root = { 
+// 	"data" : [ 
+// 		[ 7, "CAA03504-5755-47A9-99B7-B4509ECBD0A9", 7, 1430397144, "883508", 1430397144, "883508", 
+// 		"{\n}", "15065228", "47", "M", "B", "2015-04-25T00:00:00", "19:30", "UNIT N HOWARD ST", 
+// 		"Unknown Offense", "UNIT N Howard St", "2 0050", "Dis.Erly Conduct || Disorderly Conduct", 
+// 		"Central", "113", "DOWNTOWN", [ null, "39.2894330613", "-76.6194086962", null, false ] ], 
+		
+// 		[ 8, "6BFE714C-E165-4C19-9B8F-72432CAA1B43", 8, 1430397144, "883508", 1430397144, "883508", 
+// 		"{\n}", "15065152", "40", "M", "B", "2015-04-25T00:00:00", "15:19", "2300 E NORTHERN PKWY", 
+// 		"Unknown Offense", "5600 Loch Raven Blvd", "1 1609", "Firearm Poss W/Fel Convict || Hgv Violation", 
+// 		"Northeastern", "424", "HAMILTON HILLS", [ null, "39.3683876560", "-76.5667822937", null, false ] ], 
+		
+// 		[ 9, "7227178F-590C-4E0C-97BA-A609E82DEEC8", 9, 1430397144, "883508", 1430397144, "883508", 
+// 		"{\n}", "15065114", "33", "M", "B", "2015-04-25T00:00:00", "09:40", "500 ROUNDVIEW RD", 
+// 		"4C-Agg. Asslt.- Oth.", "500 Roundview Rd", "1 1415", "Asslt-Sec Degree || Assault", 
+// 		"Southern", "924", "CHERRY HILL", [ null, "39.2487890315", "-76.6201628356", null, false ] ], 
+
+// 		[ 10, "E0CAFC1B-A5E5-46D6-9FD1-C5DBD9E5EBC4", 10, 1430397144, "883508", 1430397144, "883508", 
+// 		"{\n}", "15065222", "36", "M", "W", "2015-04-25T00:00:00", "22:25", "500 E BALTIMORE ST", 
+// 		"Unknown Offense", "500 E Fayette St", "2 0050", "Dis.Erly Conduct || Disorderly", 
+// 		"Central", "111", "DOWNTOWN", [ null, "39.2898145556", "-76.6088188813", null, false ] ], 
+
+// 		[ 11, "5B8027EC-E3D5-4D6E-8874-957679C4C68D", 11, 1430397144, "883508", 1430397144, "883508", 
+// 		"{\n}", "15065150", "43", "M", "B", "2015-04-25T00:00:00", "14:00", "800 MC KIM ST", 
+// 		"6D-Larceny- From Auto", "500 E Eager St", "1 0521", "Theft Less Than $100.00 || Larceny From Auto", 
+// 		"Eastern", "315", "PENN-FALLSWAY", [ null, "39.2990267034", "-76.6062466105", null, false ] ]
+// 		]
+// };	
+
+	// var keyWidth = 150;
+	// var key = svg.append('rect')
+	// 								.attr("x", diameter-keyWidth)
+	// 								.attr("width", keyWidth)
+	// 								.attr("height", keyWidth)
+	// 								.attr("fill", "blue");
+
+	var info;
+
+	var dotcolor = function (d) {
+			if (d[11] === "B") {
+					var hue = parseInt(d[9])+ 20;
+					return "rgb(" + hue + "," + hue + "," + hue + ")";
+			} else {
+					var hue = 235 - parseInt(d[9]);
+					return "rgb(" + hue + "," + hue + "," + hue + ")";
+			}
+	}
 
 	var circles = svg.selectAll("circle")
 					.data(root.data)
 					.enter()
 					.append("circle")
-						.attr("cx", function(d) { return (parseInt(d[22][1]) -39) * 20; } )
-						.attr("cy", function(d) { return (parseInt(d[22][1]) +77) * 20; } )
-						.attr("r", function(d) {
-							console.log('in r');
-							console.log(d);
+						.attr("cx", function(d,i) {
+							return (parseFloat(d[22][1]) -39) * 1000; } )
 
-							return 30;})
-						.style("fill", function(d) {
-							if (d[11] === "B") {
-								return "black";
-							} else {
-								return "green";
-							}
-						})
-						.on("mouseover", function() {d3.select(this)
-															.style("fill", "orange")
-															.on("mouseout", function(){
-																d3.select(this)
-																	.style("fill", "black");
-															})});
+						.attr("cy", function(d) { 
+
+							// console.log((parseFloat(d[22][2]) +77) * 100);
+							console.log((parseFloat(d[22][1]) -39) * 10000 - 2480 + ',' + ((parseFloat(d[22][2]) +77) * 1000 - 370)); 
+							return (parseFloat(d[22][2]) +77) * 1000 - 300; } )
+						.attr("r", function(d) { return 5; })
+						.style("fill", dotcolor)
+						.on("mouseover", 
+							function() {
+								d3.select(this).style("fill", "yellow");
+								info = d3.select(this).data()[0][16];
+								d3.select(this).selectAll('text').remove();
+								d3.select(this).append("svg:title").text(function(){ return info; });
+							})
+						.on("mouseout", 
+							function(){
+								d3.select(this).style("fill", dotcolor);
+							});
 
 
 
-  var node = svg.selectAll(".node")
-      .data(bubble.nodes(root.data))
-      // .filter(function(d) { return !d.children; }))
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { 
-      	console.log(d);
-      	console.log('in function(d)')
-      	return "translate(" + d.x + "," + d.y + ")"; });
-
-  // node.append("title")
-  //     .text(function(d) { return d.className + ": " + format(d.value); });
-
-  node.append("circle")
-      .attr("r", function(d) { return 30; })
-      .style("fill", function(d) { return color("red"); });
-
-  // node.append("text")
-  //     .attr("dy", ".3em")
-  //     .style("text-anchor", "middle")
-  //     .text(function(d) { return "hello".substring(0, d.r / 3); });
 });
-
-
-// Returns a flattened hierarchy containing all leaf nodes under the root.
-	function classes(root) {
-		var classes = [];
-
-		function recurse(name, node) {
-			if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-			else classes.push({packageName: name, className: node.name, value: node.size, leader : node.leader, members : node.members});
-		}
-
-		recurse(null, root);
-		return {children: classes};
-	}
-
-	d3.select(self.frameElement).style("height", diameter + "px");
-
-
 
 
 </script>
