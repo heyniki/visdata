@@ -157,11 +157,13 @@ var svg = d3.select("body").append("svg")
     .attr("height", diameter)
     .attr("class", "bubble");
 
-
+var json;
 d3.json("bmorecrime.json", function(error, root) {
+	json = root;
 	
 	// data = root[0];
 	console.log(root);
+	console.log(root[data]);
 	console.log("hello");
 
   var node = svg.selectAll(".node")
