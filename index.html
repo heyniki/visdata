@@ -1,1 +1,64 @@
-My Page
+<!Doctype html>
+<html>
+<head>
+	<meta charset utf="utf-8">
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8">
+	</script>
+</head>
+
+<body>
+
+	<script>
+	//set up a canvas
+	var canvas = d3.select("body").append("svg")
+					.attr("width", 500)
+					.attr("height", 500)
+
+	//set up data
+	var data = [{"name" : "bob", "height": 10, "age" : 22},
+				{"name" : "alice", "height": 44, "age" : 25}];
+	
+	var radfn = function() { d3.select(this)
+									.transition()
+										.attr("r", 40);	};
+
+	//append shapes
+	var circles = canvas.selectAll("circle")
+					.data(data)
+					.enter()
+					.append("circle")
+						.attr("cx", function(d,i) {return i*50+30})
+						.attr("cy", 100)
+						.attr("r", function(d) {return d.age;})
+						.style("fill", "black")
+						.on("mouseover", function() {d3.select(this)
+															.style("fill", "orange")
+															.on("mouseout", function(){
+																d3.select(this)
+																	.style("fill", "black");
+															})})
+						.on("dblclick", radfn)
+						.transition()
+						.;
+
+
+
+
+
+
+	</script>
+
+	<p> par 1</p>
+
+
+<svg width="720" height="120">
+  <circle cx="40" cy="60" r="10"></circle>
+  <circle cx="80" cy="60" r="10"></circle>
+  <circle cx="120" cy="60" r="10"></circle>
+</svg>
+
+</body>
+
+
+
+</html>
