@@ -158,9 +158,9 @@ var svg = d3.select("body").append("svg")
     .attr("class", "bubble");
 
 
-d3.json("flare.json", function(error, root) {
+d3.json("bmorecrime.json", function(error, root) {
   var node = svg.selectAll(".node")
-      .data(bubble.nodes(classes(root))
+      .data(bubble.nodes((root))
       .filter(function(d) { return !d.children; }))
     .enter().append("g")
       .attr("class", "node")

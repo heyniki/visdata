@@ -1,0 +1,28 @@
+{ 
+	"data" : [ 
+		[ 7, "CAA03504-5755-47A9-99B7-B4509ECBD0A9", 7, 1430397144, "883508", 1430397144, "883508", 
+		"{\n}", "15065228", "47", "M", "B", "2015-04-25T00:00:00", "19:30", "UNIT N HOWARD ST", 
+		"Unknown Offense", "UNIT N Howard St", "2 0050", "Dis.Erly Conduct || Disorderly Conduct", 
+		"Central", "113", "DOWNTOWN", [ null, "39.2894330613", "-76.6194086962", null, false ] ], 
+		
+		[ 8, "6BFE714C-E165-4C19-9B8F-72432CAA1B43", 8, 1430397144, "883508", 1430397144, "883508", 
+		"{\n}", "15065152", "40", "M", "B", "2015-04-25T00:00:00", "15:19", "2300 E NORTHERN PKWY", 
+		"Unknown Offense", "5600 Loch Raven Blvd", "1 1609", "Firearm Poss W/Fel Convict || Hgv Violation", 
+		"Northeastern", "424", "HAMILTON HILLS", [ null, "39.3683876560", "-76.5667822937", null, false ] ], 
+		
+		[ 9, "7227178F-590C-4E0C-97BA-A609E82DEEC8", 9, 1430397144, "883508", 1430397144, "883508", 
+		"{\n}", "15065114", "33", "M", "B", "2015-04-25T00:00:00", "09:40", "500 ROUNDVIEW RD", 
+		"4C-Agg. Asslt.- Oth.", "500 Roundview Rd", "1 1415", "Asslt-Sec Degree || Assault", 
+		"Southern", "924", "CHERRY HILL", [ null, "39.2487890315", "-76.6201628356", null, false ] ], 
+
+		[ 10, "E0CAFC1B-A5E5-46D6-9FD1-C5DBD9E5EBC4", 10, 1430397144, "883508", 1430397144, "883508", 
+		"{\n}", "15065222", "36", "M", "W", "2015-04-25T00:00:00", "22:25", "500 E BALTIMORE ST", 
+		"Unknown Offense", "500 E Fayette St", "2 0050", "Dis.Erly Conduct || Disorderly", 
+		"Central", "111", "DOWNTOWN", [ null, "39.2898145556", "-76.6088188813", null, false ] ], 
+
+		[ 11, "5B8027EC-E3D5-4D6E-8874-957679C4C68D", 11, 1430397144, "883508", 1430397144, "883508", 
+		"{\n}", "15065150", "43", "M", "B", "2015-04-25T00:00:00", "14:00", "800 MC KIM ST", 
+		"6D-Larceny- From Auto", "500 E Eager St", "1 0521", "Theft Less Than $100.00 || Larceny From Auto", 
+		"Eastern", "315", "PENN-FALLSWAY", [ null, "39.2990267034", "-76.6062466105", null, false ] ]
+		]
+}
