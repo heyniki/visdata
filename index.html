@@ -159,9 +159,12 @@ var svg = d3.select("body").append("svg")
 
 
 d3.json("bmorecrime.json", function(error, root) {
+	data = root[0];
+	console.log(data);
+
   var node = svg.selectAll(".node")
       .data(bubble.nodes((root))
-      .filter(function(d) { return !d.children; }))
+      // .filter(function(d) { return !d.children; }))
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
