@@ -154,8 +154,8 @@ var bubble = d3.layout.pack()
 
 var svg = d3.select("body").append("svg")
     .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
+    .attr("height", diameter);
+    // .attr("class", "bubble");
 
 var json;
 d3.json("bmorecrime.json", function(error, root) {
@@ -163,6 +163,30 @@ d3.json("bmorecrime.json", function(error, root) {
 	
 	console.log(root);
 	console.log("hello");
+
+	var circles = canvas.selectAll("circle")
+					.data(root.data)
+					.enter()
+					.append("circle")
+						.attr("cx", function(d,i) {return i*50+30})
+						.attr("cy", 100)
+						.attr("r", function(d) {
+							console.log('in r');
+							console.log(d);
+
+							return 30;})
+						.style("fill", "black")
+						.on("mouseover", function() {d3.select(this)
+															.style("fill", "orange")
+															.on("mouseout", function(){
+																d3.select(this)
+																	.style("fill", "black");
+															})})
+						.on("dblclick", radfn)
+						.transition()
+						.;
+
+
 
   var node = svg.selectAll(".node")
       .data(bubble.nodes(root.data))
@@ -181,10 +205,10 @@ d3.json("bmorecrime.json", function(error, root) {
       .attr("r", function(d) { return 30; })
       .style("fill", function(d) { return color("red"); });
 
-  node.append("text")
-      .attr("dy", ".3em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return "hello".substring(0, d.r / 3); });
+  // node.append("text")
+  //     .attr("dy", ".3em")
+  //     .style("text-anchor", "middle")
+  //     .text(function(d) { return "hello".substring(0, d.r / 3); });
 });
 
 
