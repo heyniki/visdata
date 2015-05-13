@@ -178,10 +178,10 @@ d3.json("bmorecrime.json", function(error, root) {
       .attr("r", function(d) { return 30; })
       .style("fill", function(d) { return color("red"); });
 
-  // node.append("text")
-  //     .attr("dy", ".3em")
-  //     .style("text-anchor", "middle")
-  //     .text(function(d) { return d.className.substring(0, d.r / 3); });
+  node.append("text")
+      .attr("dy", ".3em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return "hello".substring(0, d.r / 3); });
 });
 
 
